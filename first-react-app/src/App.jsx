@@ -1,3 +1,5 @@
+import UserCard from "./UserCard";
+
 const App = () => {
   const tasks = ["Помыть посуду", "Сделать домашнее задание", "Прочитать книгу"];
   return (
@@ -8,6 +10,9 @@ const App = () => {
           <li key={index}>{item}</li>
         ))}
       </ul>
+      <UserCard name="Анна" age={27} />
+      <UserCard name="Елена" age={20} />
+      <UserCard name="Геннадий" age={54} />
     </>
   )
 }
