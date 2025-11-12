@@ -10,7 +10,7 @@ const Counter = () => {
     const changeCount = () => {
         const value = Number(prompt("Введите новое значение счётчика:"));
 
-        value > 0 && !isNaN(value)
+        value >= 0 && !isNaN(value)
             ? setCount(value)
             : alert("Введите корректное число.");
     }
