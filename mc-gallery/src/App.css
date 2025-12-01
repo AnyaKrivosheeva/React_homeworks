@@ -1,0 +1,36 @@
+.app {
+    text-align: center;
+    padding: 50px;
+}
+
+.app .photos-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.app .photos-container img {
+    width: 300px;
+    height: 200px;
+}
+
+.app .pagination {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.app .pagination .arrow {
+    cursor: pointer;
+}
+
+.app .pagination .page {
+    cursor: pointer;
+}
+
+.app .pagination .page.active {
+    color: red;
+}
