@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react"
+import AuthContext from './AuthContext'
 import './App.css'
 import Gallery from "./components/Gallery";
 import Pagination from "./components/Pagination";
+import LogButton from "./components/LogButton";
 
 const PHOTOS_PER_PAGE = 3;
 
@@ -15,6 +17,8 @@ function App() {
 
   const slicedPhotos = photos.slice(firstIndex, lastIndex);
 
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   useEffect(() => {
     fetch('https://picsum.photos/v2/list')
       .then(response => response.json())
@@ -22,10 +26,15 @@ function App() {
   }, []);
 
   return (
-    <div className='app'>
-      <Gallery photos={photos} slicedPhotos={slicedPhotos} />
-      <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} totalPages={totalPages} />
-    </div>
+    <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
+      <div className='app'>
+        <Gallery photos={photos} slicedPhotos={slicedPhotos} />
+        <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} totalPages={totalPages} />
+        <LogButton />
+        {isLoggedIn && <p>Вы авторизованы!</p>}
+        {!isLoggedIn && <p>Вы не авторизованы! Авторизуйтесь!</p>}
+      </div>
+    </AuthContext.Provider>
   )
 }
 
