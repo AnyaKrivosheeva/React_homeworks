@@ -5,13 +5,13 @@ import AuthContext from "../AuthContext"
 const LogButton = () => {
     const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
 
-    const toggleLog = (isLoggedIn) => {
-        return !isLoggedIn ? setIsLoggedIn(true) : setIsLoggedIn(false);
+    const toggleLog = () => {
+        setIsLoggedIn(prev => !prev);
     };
 
     return (
         <>
-            <button onClick={() => toggleLog(isLoggedIn)}>
+            <button onClick={() => toggleLog()}>
                 {isLoggedIn && 'Выйти'}
                 {!isLoggedIn && 'Войти'}
             </button>
