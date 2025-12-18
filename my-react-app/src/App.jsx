@@ -1,8 +1,8 @@
 import { useCallback, useState } from "react"
 import UserForm from "./UserForm"
 import UserList from "./UserList"
-import ExpensiveCalculation from "./ExpensiveCalculation";
-import TodoList from "./ToDoList";
+import ExpensiveCalculation from "./ExpensiveCalculation"
+import TodoList from "./ToDoList"
 
 function App() {
   const [users, setUsers] = useState([
