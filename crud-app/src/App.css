@@ -1,0 +1,18 @@
+.App {
+    padding: 15px;
+}
+
+.App .title {
+    text-align: center;
+}
+
+.App .wrapper {
+    display: flex;
+    gap: 10px;
+    justify-content: space-around;
+}
+
+.App .wrapper .posts {
+    height: 300px;
+    overflow: scroll;
+}
