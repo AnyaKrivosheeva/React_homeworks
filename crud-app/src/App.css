@@ -13,6 +13,55 @@
 }
 
 .App .wrapper .posts {
+    width: 800px;
     height: 300px;
     overflow: scroll;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.App .wrapper .posts .posts-item {
+    display: flex;
+    gap: 10px;
+}
+
+.App .wrapper .posts .posts-item .post-title {
+    cursor: pointer;
+}
+
+.App .wrapper .posts .posts-item .post-button {
+    cursor: pointer;
+}
+
+.App .wrapper .pagination {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.App .wrapper .pagination .pagination-item {
+    cursor: pointer;
+}
+
+.App .wrapper .pagination .pagination-item:hover {
+    color: red;
+}
+
+.active {
+    color: red;
+}
+
+.App .wrapper .content {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.App .wrapper .content .comments {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    overflow: scroll;
+    max-height: 400px;
 }
