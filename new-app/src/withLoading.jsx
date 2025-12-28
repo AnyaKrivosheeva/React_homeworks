@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 
 const withLoading = (WrappedComponent) => {
-    return (props) => {
+
+    function WithLoadingComponent(props) {
         const [isLoading, setIsLoading] = useState(true);
 
         useEffect(() => {
@@ -18,6 +19,8 @@ const withLoading = (WrappedComponent) => {
 
         return <WrappedComponent {...props} />;
     };
+
+    return WithLoadingComponent;
 };
 
 export default withLoading
