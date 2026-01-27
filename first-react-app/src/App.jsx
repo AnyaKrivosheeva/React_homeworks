@@ -1,19 +1,55 @@
-import UserCard from "./UserCard";
 
 const App = () => {
-  const tasks = ["Помыть посуду", "Сделать домашнее задание", "Прочитать книгу"];
+
+  const createStore = (reducer, initialState) => {
+    const currentReducer = reducer;
+
+    let state = initialState;
+
+    let listener = () => {
+      console.log('Initial listener');
+    };
+
+    return {
+      dispatch(action) {
+        state = currentReducer(state, action);
+        listener();
+      },
+      subscribe(newListener) {
+        listener = newListener;
+      },
+      getState() {
+        return state;
+      }
+    }
+  };
+
+  const counter = (state = 0, action) => {
+    switch (action.type) {
+      case 'INCREMENT':
+        return state + 1;
+      case 'DECREMENT':
+        return state - 1;
+      default:
+        return state;
+    }
+  };
+
+  const store = createStore(counter);
+
+  store.subscribe(() => {
+    console.log(store.getState());
+  });
+
+  store.dispatch({ type: 'INCREMENT' });
+  store.dispatch({ type: 'INCREMENT' });
+  store.dispatch({ type: 'INCREMENT' });
+  store.dispatch({ type: 'INCREMENT' });
+  store.dispatch({ type: 'DECREMENT' });
+
   return (
-    <>
-      <h1>Список дел</h1>
-      <ul>
-        {tasks.map((item, index) => (
-          <li key={index}>{item}</li>
-        ))}
-      </ul>
-      <UserCard name="Анна" age={27} />
-      <UserCard name="Елена" age={20} />
-      <UserCard name="Геннадий" age={54} />
-    </>
+    <div>
+    </div>
   )
 }
 
