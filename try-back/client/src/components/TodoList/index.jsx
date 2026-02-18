@@ -1,35 +1,20 @@
+import { useFetch } from "../../hooks/useFetch";
 
 export default function TodoList(props) {
     const {
         todoList,
         updateTodoList,
+        setEditingTodo,
     } = props;
 
+    const { request } = useFetch();
+
     const deleteTodoItem = async (title) => {
-        try {
-            const response = await fetch('http://localhost:3002/api/todos/delete', {
-                method: 'DELETE',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    title
-                })
-            });
 
-            if (!response.ok) {
-                const json = await response.json()
-                alert(json.message);
-                return;
-            }
+        const data = await request('http://localhost:3002/api/todos/delete', 'DELETE', { title });
 
-            const responseData = await response.json();
-            console.log('Success:', responseData);
-
+        if (data) {
             updateTodoList();
-        } catch (e) {
-            console.log(e);
         }
     };
 
@@ -43,6 +28,7 @@ export default function TodoList(props) {
                     <div key={todo._id}>
                         {todo.title}
                         <button style={{ marginLeft: "20px", cursor: 'pointer' }} onClick={() => deleteTodoItem(todo.title)}>Удалить</button>
+                        <button style={{ marginLeft: "20px", cursor: 'pointer' }} onClick={() => setEditingTodo(todo)}>Редактировать</button>
                     </div>)
             }
         </>

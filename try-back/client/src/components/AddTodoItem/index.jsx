@@ -1,4 +1,6 @@
 import { useState } from "react";
+import TodoForm from "../TodoForm";
+import { useFetch } from "../../hooks/useFetch";
 
 export default function AddTodoItem(props) {
     const {
@@ -6,45 +8,20 @@ export default function AddTodoItem(props) {
     } = props;
 
     const [title, setTitle] = useState('');
+    const { request } = useFetch();
 
     const onHandleSubmit = async (e) => {
         e.preventDefault();
 
-        try {
-            const response = await fetch('http://localhost:3002/api/todos/add', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    title
-                })
-            });
+        const data = await request('http://localhost:3002/api/todos/add', 'POST', { title });
 
-            if (!response.ok) {
-                const json = await response.json()
-                alert(json.message);
-                return;
-            }
-
-            const responseData = await response.json();
-            console.log('Success:', responseData);
-
+        if (data) {
             updateTodoList();
-
-        } catch (error) {
-            console.error('Error:', error);
+            setTitle('');
         }
-
-        setTitle('');
     };
 
     return (
-        <form onSubmit={onHandleSubmit}>
-            <input type="text" placeholder="title" value={title} onChange={(e) => setTitle(e.target.value)} />
-            <br />
-            <button type="submit">Добавить</button>
-        </form>
+        <TodoForm onHandleSubmit={onHandleSubmit} title={title} setTitle={setTitle} />
     )
 };
