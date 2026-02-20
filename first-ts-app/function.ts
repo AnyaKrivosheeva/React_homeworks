@@ -3,8 +3,7 @@ function greeting(name: string): string {
     return `Hello, ${name}`;
 }
 
-console.log(greeting("Anya"));
-
+console.log(greeting("Anya")); 
 
 
 function add(a: number, b: number): number {
@@ -12,3 +11,4 @@ function add(a: number, b: number): number {
 }
 
 console.log(add(5, 20));
+
